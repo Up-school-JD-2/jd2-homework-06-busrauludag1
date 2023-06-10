@@ -74,7 +74,7 @@ public class Main {
     System.out.println("\n\nACTIVE PRODUCTS SORTED BY PRICE: ");
     System.out.println(manager.getActiveProductsSortedByPrice());
 
-    System.out.println("\n\nAVERAGE PRICE IN CATEGORY: ");
+    System.out.println("\n\nAVERAGE PRICE IN NOT FOUND CATEGORY 5: ");
     System.out.println(manager.calculateAveragePriceInCategory("Category 5"));
 
     System.out.println("\n\nPRICE SUM BY CATEGORY: ");

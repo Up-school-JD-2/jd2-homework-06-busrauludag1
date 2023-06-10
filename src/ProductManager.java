@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.OptionalDouble;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -105,13 +100,23 @@ public class ProductManager {
 
   public List<Product> getActiveProductsSortedByPrice() {
     // ProductStatus'ü ACTIVE olan ürünleri fiyatlarına göre sıralayıp döndüren metodu yazın
-    return null;
+    return products.values()
+            .stream()
+            .filter(product -> ProductStatus.ACTIVE == product.getProductStatus())
+            .sorted((product1, product2) -> (int) (product1.getPrice() - product2.getPrice()))
+            .toList();
   }
 
   public double calculateAveragePriceInCategory(String category) {
     // String olarak verilen category'e ait olan ürünlerin fiyatlarının ortalamasını yoksa 0.0 döndüren metodu yazın
     // tip: OptionalDouble kullanımını inceleyin.
-    return 0.0;
+    OptionalDouble resultOpt = products.values()
+            .stream()
+            .filter(product -> product.getCategory().equals(category))
+            .mapToDouble(Product::getPrice)
+            .average();
+
+    return resultOpt.orElse(0.0);
   }
 
   public Map<String, Double> getCategoryPriceSum() {
@@ -120,6 +125,10 @@ public class ProductManager {
     // örn:
     // category-1 105.2
     // category-2 45.0
-    return null;
+    return products.values()
+            .stream()
+            .filter(product -> ProductStatus.ACTIVE.equals(product.getProductStatus()))
+            .collect(Collectors.groupingBy(Product::getCategory,
+                                           Collectors.summingDouble(product -> product.getPrice() * product.getStock())));
   }
 }

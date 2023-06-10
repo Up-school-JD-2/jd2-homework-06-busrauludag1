@@ -61,7 +61,7 @@ public class Main {
     System.out.println("Total value of products: " + totalValue);
 
     var singleTotalPrice = manager.calculateTotalValue(Product::getPrice);
-    System.out.println("single Total price" + singleTotalPrice);
+    System.out.println("single Total price: " + singleTotalPrice);
 
     System.out.println("\n\nFILTER PRODUCTS");
     List<Product> filteredProducts =
@@ -70,5 +70,15 @@ public class Main {
                 product.getProductStatus()));
     System.out.println("Active products :");
     filteredProducts.forEach(System.out::println);
+
+    System.out.println("\n\nACTIVE PRODUCTS SORTED BY PRICE: ");
+    System.out.println(manager.getActiveProductsSortedByPrice());
+
+    System.out.println("\n\nAVERAGE PRICE IN CATEGORY: ");
+    System.out.println(manager.calculateAveragePriceInCategory("Category 5"));
+
+    System.out.println("\n\nPRICE SUM BY CATEGORY: ");
+    System.out.println(manager.getCategoryPriceSum());
+
   }
 }
